@@ -4,7 +4,7 @@ pub mod candid {
     use serde::Deserialize;
     use std::collections::{BTreeMap, HashMap};
 
-    #[derive(Default, Clone, CandidType, Deserialize)]
+    #[derive(Default, Clone)]
     pub struct State {
         pub stable: StableState,
     }
@@ -34,4 +34,13 @@ pub mod candid {
         pub db: Db,
         pub rules: Rules,
     }
+}
+
+pub mod stable {
+    use candid::CandidType;
+    use candid::Principal;
+    use serde::Deserialize;
+
+    #[derive(CandidType, Deserialize, Clone, PartialOrd, Ord, Eq, PartialEq)]
+    pub struct MyPrincipal(Principal);
 }
