@@ -1,4 +1,4 @@
-use crate::types::candid::{ControllerId, Controllers, Entity, StableState, State};
+use crate::types::candid::{ControllerId, Controllers, Entity};
 use crate::types::stable::MyPrincipal;
 use crate::{CANDID_STATE, CONTROLLERS_STATE, STABLE_STATE};
 
@@ -29,9 +29,5 @@ pub fn set_stable_controllers(key: &MyPrincipal, controller: &Entity) {
 }
 
 pub fn get_stable_controllers() -> Vec<(MyPrincipal, Entity)> {
-    CONTROLLERS_STATE.with(|p| {
-        p.borrow()
-            .iter()
-            .collect()
-    })
+    CONTROLLERS_STATE.with(|p| p.borrow().iter().collect())
 }

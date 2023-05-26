@@ -4,8 +4,8 @@ mod types;
 
 use crate::store::{
     get_candid_controllers as get_candid_controllers_store,
-    set_candid_controllers as set_candid_controllers_store,
     get_stable_controllers as get_stable_controllers_store,
+    set_candid_controllers as set_candid_controllers_store,
     set_stable_controllers as set_stable_controllers_store,
 };
 use crate::types::candid::{ControllerId, Controllers, Entity, StableState, State};
@@ -34,10 +34,9 @@ thread_local! {
     static STABLE_STATE: RefCell<StateCell> = MEMORY_MANAGER.with(|memory_manager|
         RefCell::new(StateCell::init(memory_manager.borrow().get(STABLE_MEMORY_ID), StableState::default()).expect("failed to initialize stable log")));
 
-    static CONTROLLERS_STATE: RefCell<ControllersState> = MEMORY_MANAGER.with(|memory_manager|
-        RefCell::new(StableBTreeMap::init(
+    static CONTROLLERS_STATE: RefCell<ControllersState> = RefCell::new(StableBTreeMap::init(
             MEMORY_MANAGER.with(|memory_manager| memory_manager.borrow().get(CONTROLLERS_MEMORY_ID)),
-        )));
+        ))
 }
 
 #[init]

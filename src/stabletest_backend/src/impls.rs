@@ -1,4 +1,4 @@
-use crate::types::candid::{Controllers, Entity, StableState};
+use crate::types::candid::{Entity, StableState};
 use crate::types::stable::MyPrincipal;
 use candid::{decode_one, encode_one, Principal};
 use ic_stable_structures::{BoundedStorable, Storable};
