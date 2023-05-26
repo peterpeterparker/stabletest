@@ -42,5 +42,5 @@ pub mod stable {
     use serde::Deserialize;
 
     #[derive(CandidType, Deserialize, Clone, PartialOrd, Ord, Eq, PartialEq)]
-    pub struct MyPrincipal(Principal);
+    pub struct MyPrincipal(pub(crate) Principal);
 }
