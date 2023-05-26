@@ -2,8 +2,8 @@ mod impls;
 mod store;
 mod types;
 
-use crate::store::set_controllers as set_controllers_store;
-use crate::types::candid::{ControllerId, Entity, StableState, State};
+use crate::store::{set_controllers as set_controllers_store, get_controllers as get_controllers_store};
+use crate::types::candid::{ControllerId, Controllers, Entity, StableState, State};
 use candid::{candid_method, export_service};
 use ic_cdk::storage::{stable_restore, stable_save};
 use ic_cdk_macros::{init, post_upgrade, pre_upgrade, query, update};
@@ -55,6 +55,12 @@ fn greet(name: String) -> String {
 #[update]
 fn set_controllers(id: ControllerId, controller: Entity) {
     set_controllers_store(&id, &controller);
+}
+
+#[candid_method(query)]
+#[query]
+fn get_controllers() -> Controllers {
+    get_controllers_store()
 }
 
 ///

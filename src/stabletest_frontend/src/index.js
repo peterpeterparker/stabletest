@@ -1,19 +1,17 @@
 import { stabletest_backend } from "../../declarations/stabletest_backend";
+import {AnonymousIdentity} from "@dfinity/agent";
 
-document.querySelector("form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const button = e.target.querySelector("button");
+const action = async () => {
+  const controller = {
+    created_at: 0n,
+    updated_at: 0n,
+  };
 
-  const name = document.getElementById("name").value.toString();
+  await stabletest_backend.set_controllers(new AnonymousIdentity().getPrincipal(), controller);
 
-  button.setAttribute("disabled", true);
+  console.log(await stabletest_backend.get_controllers())
+}
 
-  // Interact with foo actor, calling the greet method
-  const greeting = await stabletest_backend.greet(name);
+const init = () => document.querySelector("button").addEventListener("click", action, {passive: true});
 
-  button.removeAttribute("disabled");
-
-  document.getElementById("greeting").innerText = greeting;
-
-  return false;
-});
+document.addEventListener("DOMContentLoaded", init, {once: true});
