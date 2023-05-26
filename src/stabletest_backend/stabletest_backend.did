@@ -1,6 +1,7 @@
 type Entity = record { updated_at : nat64; created_at : nat64 };
 service : {
-  get_controllers : () -> (vec record { principal; Entity }) query;
-  greet : (text) -> (text) query;
-  set_controllers : (principal, Entity) -> ();
+  get_candid_controllers : () -> (vec record { principal; Entity }) query;
+  get_stable_controllers : () -> (vec record { principal; Entity }) query;
+  set_candid_controllers : (principal, Entity) -> ();
+  set_stable_controllers : (principal, Entity) -> ();
 }
