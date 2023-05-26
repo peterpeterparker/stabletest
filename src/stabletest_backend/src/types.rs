@@ -1,12 +1,18 @@
 pub mod candid {
     use candid::CandidType;
+    use candid::Principal;
     use serde::Deserialize;
     use std::collections::{BTreeMap, HashMap};
-    use candid::Principal;
 
-    #[derive(Default, Clone)]
+    #[derive(Default, Clone, CandidType, Deserialize)]
     pub struct State {
         pub stable: StableState,
+    }
+
+    #[derive(Default, CandidType, Deserialize, Clone)]
+    pub struct StableState {
+        pub controllers: Controllers,
+        pub db: DbStableState,
     }
 
     pub type ControllerId = Principal;
@@ -27,11 +33,5 @@ pub mod candid {
     pub struct DbStableState {
         pub db: Db,
         pub rules: Rules,
-    }
-
-    #[derive(Default, CandidType, Deserialize, Clone)]
-    pub struct StableState {
-        pub controllers: Controllers,
-        pub db: DbStableState,
     }
 }
