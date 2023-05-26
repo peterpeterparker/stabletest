@@ -16,13 +16,14 @@ use ic_cdk_macros::{init, post_upgrade, pre_upgrade, query, update};
 use ic_stable_structures::memory_manager::{MemoryId, MemoryManager, VirtualMemory};
 use ic_stable_structures::{Cell, DefaultMemoryImpl, StableBTreeMap};
 use std::cell::RefCell;
+use ic_cdk::print;
 
 type Memory = VirtualMemory<DefaultMemoryImpl>;
 type StateCell = Cell<StableState, Memory>;
 type ControllersState = StableBTreeMap<MyPrincipal, Entity, Memory>;
 
-const STABLE_MEMORY_ID: MemoryId = MemoryId::new(0);
-const CONTROLLERS_MEMORY_ID: MemoryId = MemoryId::new(1);
+// const STABLE_MEMORY_ID: MemoryId = MemoryId::new(0);
+const CONTROLLERS_MEMORY_ID: MemoryId = MemoryId::new(0);
 
 thread_local! {
     static CANDID_STATE: RefCell<State> = RefCell::default();
@@ -31,8 +32,8 @@ thread_local! {
     static MEMORY_MANAGER: RefCell<MemoryManager<DefaultMemoryImpl>> =
         RefCell::new(MemoryManager::init(DefaultMemoryImpl::default()));
 
-    static STABLE_STATE: RefCell<StateCell> = MEMORY_MANAGER.with(|memory_manager|
-        RefCell::new(StateCell::init(memory_manager.borrow().get(STABLE_MEMORY_ID), StableState::default()).expect("failed to initialize stable log")));
+    // static STABLE_STATE: RefCell<StateCell> = MEMORY_MANAGER.with(|memory_manager|
+//        RefCell::new(StateCell::init(memory_manager.borrow().get(STABLE_MEMORY_ID), StableState::default()).expect("failed to initialize stable log")));
 
     static CONTROLLERS_STATE: RefCell<ControllersState> = RefCell::new(StableBTreeMap::init(
             MEMORY_MANAGER.with(|memory_manager| memory_manager.borrow().get(CONTROLLERS_MEMORY_ID)),
@@ -52,9 +53,8 @@ fn pre_upgrade() {
 
 #[post_upgrade]
 fn post_upgrade() {
-    let (stable,): (StableState,) = stable_restore().unwrap();
-
-    CANDID_STATE.with(|state| *state.borrow_mut() = State { stable });
+    // let (stable,): (StableState,) = stable_restore().unwrap();
+    // CANDID_STATE.with(|state| *state.borrow_mut() = State { stable });
 }
 
 #[candid_method(update)]
@@ -78,6 +78,7 @@ fn set_stable_controllers(key: MyPrincipal, controller: Entity) {
 #[candid_method(query)]
 #[query]
 fn get_stable_controllers() -> Vec<(MyPrincipal, Entity)> {
+    print("Get stable controllers.");
     get_stable_controllers_store()
 }
 

@@ -1,6 +1,6 @@
 use crate::types::candid::{ControllerId, Controllers, Entity};
 use crate::types::stable::MyPrincipal;
-use crate::{CANDID_STATE, CONTROLLERS_STATE, STABLE_STATE};
+use crate::{CANDID_STATE, CONTROLLERS_STATE};
 
 /// Candid
 

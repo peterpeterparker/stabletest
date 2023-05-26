@@ -3,6 +3,7 @@ use crate::types::stable::MyPrincipal;
 use candid::{decode_one, encode_one, Principal};
 use ic_stable_structures::{BoundedStorable, Storable};
 use std::borrow::Cow;
+use ic_cdk::print;
 
 impl Storable for StableState {
     fn to_bytes(&self) -> Cow<[u8]> {
@@ -32,10 +33,12 @@ impl BoundedStorable for Entity {
 /// Source: https://forum.dfinity.org/t/increased-canister-smart-contract-memory/6148/160?u=peterparker
 impl Storable for MyPrincipal {
     fn to_bytes(&self) -> Cow<[u8]> {
+        print("MyPrincipal to_bytes.");
         Cow::Borrowed(self.0.as_slice())
     }
 
     fn from_bytes(bytes: Cow<[u8]>) -> Self {
+        print("MyPrincipal from_bytes.");
         Self(Principal::from_slice(bytes.as_ref()))
     }
 }
