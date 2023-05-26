@@ -1,0 +1,5 @@
+type Entity = record { updated_at : nat64; created_at : nat64 };
+service : {
+  greet : (text) -> (text) query;
+  set_controllers : (principal, Entity) -> ();
+}
