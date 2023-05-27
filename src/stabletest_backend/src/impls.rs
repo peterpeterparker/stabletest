@@ -1,9 +1,9 @@
 use crate::types::candid::{Entity, StableState};
 use crate::types::stable::MyPrincipal;
 use candid::{decode_one, encode_one, Principal};
+use ic_cdk::print;
 use ic_stable_structures::{BoundedStorable, Storable};
 use std::borrow::Cow;
-use ic_cdk::print;
 
 impl Storable for StableState {
     fn to_bytes(&self) -> Cow<[u8]> {
@@ -46,4 +46,10 @@ impl Storable for MyPrincipal {
 impl BoundedStorable for MyPrincipal {
     const MAX_SIZE: u32 = 29;
     const IS_FIXED_SIZE: bool = false;
+}
+
+impl From<&Principal> for MyPrincipal {
+    fn from(principal: &Principal) -> Self {
+        MyPrincipal(*principal)
+    }
 }

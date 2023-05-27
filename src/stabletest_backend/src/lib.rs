@@ -11,12 +11,12 @@ use crate::store::{
 use crate::types::candid::{ControllerId, Controllers, Entity, StableState, State};
 use crate::types::stable::MyPrincipal;
 use candid::{candid_method, export_service};
+use ic_cdk::print;
 use ic_cdk::storage::{stable_restore, stable_save};
 use ic_cdk_macros::{init, post_upgrade, pre_upgrade, query, update};
 use ic_stable_structures::memory_manager::{MemoryId, MemoryManager, VirtualMemory};
 use ic_stable_structures::{Cell, DefaultMemoryImpl, StableBTreeMap};
 use std::cell::RefCell;
-use ic_cdk::print;
 
 type Memory = VirtualMemory<DefaultMemoryImpl>;
 type StateCell = Cell<StableState, Memory>;
@@ -46,15 +46,28 @@ fn init() {
     CANDID_STATE.with(|state| *state.borrow_mut() = State::default());
 }
 
+// 0. pre and post upgrade
+// 1. migrate from candid to stable
+// 2. once migrated remove hooks
+
 #[pre_upgrade]
 fn pre_upgrade() {
+    // TODO: 1. comment to migrate
     CANDID_STATE.with(|state| stable_save((&state.borrow().stable,)).unwrap());
 }
 
 #[post_upgrade]
 fn post_upgrade() {
-    // let (stable,): (StableState,) = stable_restore().unwrap();
-    // CANDID_STATE.with(|state| *state.borrow_mut() = State { stable });
+    // TODO: 2. comment once migrated
+    let (stable,): (StableState,) = stable_restore().unwrap();
+    // TODO: 1. comment to migrate
+    CANDID_STATE.with(|state| *state.borrow_mut() = State { stable });
+
+    // TODO: 1. uncomment to migrate
+    // TODO: 2. comment once migrated
+    // for (controller_id, entity) in stable.controllers {
+    //  set_stable_controllers_store(&MyPrincipal::from(&controller_id), &entity);
+    //  }
 }
 
 #[candid_method(update)]
