@@ -1,5 +1,5 @@
-use crate::types::candid::{Entity, StableState};
-use crate::types::stable::MyPrincipal;
+use crate::types::candid::{Controller, Entity, StableState};
+use crate::types::stable::{MyPrincipal, StableKey};
 use candid::{decode_one, encode_one, Principal};
 use ic_cdk::print;
 use ic_stable_structures::{BoundedStorable, Storable};
@@ -15,7 +15,7 @@ impl Storable for StableState {
     }
 }
 
-impl Storable for Entity {
+impl Storable for Controller {
     fn to_bytes(&self) -> Cow<[u8]> {
         Cow::Owned(encode_one(self).unwrap())
     }
@@ -25,7 +25,7 @@ impl Storable for Entity {
     }
 }
 
-impl BoundedStorable for Entity {
+impl BoundedStorable for Controller {
     const MAX_SIZE: u32 = 10 * 1024 * 1024; // 10 MB
     const IS_FIXED_SIZE: bool = false;
 }
@@ -52,4 +52,36 @@ impl From<&Principal> for MyPrincipal {
     fn from(principal: &Principal) -> Self {
         MyPrincipal(*principal)
     }
+}
+
+///
+
+impl Storable for Entity {
+    fn to_bytes(&self) -> Cow<[u8]> {
+        Cow::Owned(encode_one(self).unwrap())
+    }
+
+    fn from_bytes(bytes: Cow<[u8]>) -> Self {
+        decode_one(&bytes).unwrap()
+    }
+}
+
+impl BoundedStorable for Entity {
+    const MAX_SIZE: u32 = 10 * 1024 * 1024; // 10 MB
+    const IS_FIXED_SIZE: bool = false;
+}
+
+impl Storable for StableKey {
+    fn to_bytes(&self) -> Cow<[u8]> {
+        Cow::Owned(encode_one(self).unwrap())
+    }
+
+    fn from_bytes(bytes: Cow<[u8]>) -> Self {
+        decode_one(&bytes).unwrap()
+    }
+}
+
+impl BoundedStorable for StableKey {
+    const MAX_SIZE: u32 = 10 * 1024 * 1024; // 10 MB
+    const IS_FIXED_SIZE: bool = false;
 }

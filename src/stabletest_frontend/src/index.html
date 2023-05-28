@@ -7,16 +7,42 @@
     <base href="/" />
     <link rel="icon" href="favicon.ico" />
     <link type="text/css" rel="stylesheet" href="main.css" />
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      section {
+        margin: 1rem;
+        padding: 0.5rem;
+        border: 1px solid purple;
+      }
+    </style>
   </head>
   <body>
     <main>
-      <p>Candid:</p>
-      <button id="add-candid">Add</button>
-      <button id="get-candid">Get</button>
-      <hr/>
-      <p>Stable:</p>
-      <button id="add-stable">Add</button>
-      <button id="get-stable">Get</button>
+      <section>
+        <h1>Controllers</h1>
+        <p>Candid:</p>
+        <button id="add-candid-controllers">Add</button>
+        <button id="get-candid-controllers">Get</button>
+        <hr/>
+        <p>Stable:</p>
+        <button id="add-stable-controllers">Add</button>
+        <button id="get-stable-controllers">Get</button>
+      </section>
+
+      <section>
+        <h1>Entity</h1>
+        <p>Candid:</p>
+        <button id="add-candid-entity">Add</button>
+        <button id="get-candid-entity">Get</button>
+        <hr/>
+        <p>Stable:</p>
+        <button id="add-stable-entity">Add</button>
+        <button id="get-stable-entity">Get</button>
+      </section>
     </main>
   </body>
 </html>

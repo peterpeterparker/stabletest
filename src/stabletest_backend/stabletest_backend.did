@@ -1,7 +1,16 @@
-type Entity = record { updated_at : nat64; created_at : nat64 };
+type Controller = record { updated_at : nat64; created_at : nat64 };
+type Entity = record {
+  updated_at : nat64;
+  data : vec nat8;
+  created_at : nat64;
+};
 service : {
-  get_candid_controllers : () -> (vec record { principal; Entity }) query;
-  get_stable_controllers : () -> (vec record { principal; Entity }) query;
-  set_candid_controllers : (principal, Entity) -> ();
-  set_stable_controllers : (principal, Entity) -> ();
+  get_candid_controllers : () -> (vec record { principal; Controller }) query;
+  get_candid_entity : (text, text) -> (opt Entity) query;
+  get_stable_controllers : () -> (vec record { principal; Controller }) query;
+  get_stable_entity : (text, text) -> (opt Entity) query;
+  set_candid_controllers : (principal, Controller) -> ();
+  set_candid_entity : (text, text, Entity) -> ();
+  set_stable_controllers : (principal, Controller) -> ();
+  set_stable_entity : (text, text, Entity) -> ();
 }
