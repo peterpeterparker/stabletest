@@ -81,6 +81,11 @@ fn post_upgrade() {
     // for (controller_id, entity) in stable.controllers {
     //  set_stable_controllers_store(&MyPrincipal::from(&controller_id), &entity);
     //  }
+    // for (collection_key, collection) in stable.db.db.iter() {
+    //    for (entity_key, entity) in collection.iter() {
+    //        set_stable_entity_store(collection_key, entity_key, entity);
+    //    }
+    // }
 }
 
 /// Controllers
