@@ -58,10 +58,12 @@ impl From<&Principal> for MyPrincipal {
 
 impl Storable for Entity {
     fn to_bytes(&self) -> Cow<[u8]> {
+        print("Entity to_bytes.");
         Cow::Owned(encode_one(self).unwrap())
     }
 
     fn from_bytes(bytes: Cow<[u8]>) -> Self {
+        print("Entity from_bytes.");
         decode_one(&bytes).unwrap()
     }
 }
