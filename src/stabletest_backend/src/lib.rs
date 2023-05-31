@@ -59,6 +59,7 @@ fn init() {
     CANDID_STATE.with(|state| *state.borrow_mut() = State::default());
 }
 
+// Migrate from candid stable state to stable structures
 // 0. pre and post upgrade
 // 1. migrate from candid to stable
 // 2. once migrated remove hooks
