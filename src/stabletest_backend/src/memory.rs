@@ -7,13 +7,11 @@ use ic_stable_structures::StableBTreeMap;
 use std::cell::RefCell;
 
 const UPGRADES: MemoryId = MemoryId::new(0);
-
 const STABLE_BTREE: MemoryId = MemoryId::new(1);
 
 thread_local! {
     pub static STATE: RefCell<State> = RefCell::default();
 
-    // Migration to stable memory
     static MEMORY_MANAGER: RefCell<MemoryManager<DefaultMemoryImpl>> =
         RefCell::new(MemoryManager::init(DefaultMemoryImpl::default()));
 
