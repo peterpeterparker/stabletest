@@ -1,4 +1,5 @@
-use crate::types::candid::{Controller, Entity, StableState};
+use crate::memory::init_stable_data;
+use crate::types::candid::{Controller, Entity, StableState, State};
 use crate::types::stable::{MyPrincipal, StableKey};
 use candid::{decode_one, encode_one, Principal};
 use ic_cdk::print;
@@ -86,4 +87,15 @@ impl Storable for StableKey {
 impl BoundedStorable for StableKey {
     const MAX_SIZE: u32 = 10 * 1024 * 1024; // 10 MB
     const IS_FIXED_SIZE: bool = false;
+}
+
+/// State
+
+impl Default for State {
+    fn default() -> Self {
+        Self {
+            stable: StableState::default(),
+            new_db: init_stable_data(),
+        }
+    }
 }

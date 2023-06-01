@@ -68,8 +68,6 @@ const getStableEntity = async () => console.log(await stabletest_backend.get_sta
 const init = () => {
   document.querySelector("#add-candid-controllers").addEventListener("click", addCandidControllers, {passive: true});
   document.querySelector("#get-candid-controllers").addEventListener("click", getCandidControllers, {passive: true});
-  document.querySelector("#add-stable-controllers").addEventListener("click", addStableControllers, {passive: true});
-  document.querySelector("#get-stable-controllers").addEventListener("click", getStableControllers, {passive: true});
 
   document.querySelector("#add-candid-entity").addEventListener("click", addCandidEntity, {passive: true});
   document.querySelector("#get-candid-entity").addEventListener("click", getCandidEntity, {passive: true});
