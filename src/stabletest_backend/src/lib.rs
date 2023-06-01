@@ -10,6 +10,7 @@ use crate::controllers::{
 };
 use crate::entity::{
     get_candid_entity as get_candid_entity_store, get_stable_entity as get_stable_entity_store,
+    get_candid_entities as get_candid_entities_store, get_stable_entities as get_stable_entities_store,
     set_candid_entity as set_candid_entity_store, set_stable_entity as set_stable_entity_store,
 };
 use crate::memory::{get_upgrades_memory, STATE};
@@ -90,6 +91,12 @@ fn get_candid_entity(collection: Key, key: Key) -> Option<Entity> {
     get_candid_entity_store(&collection, &key)
 }
 
+#[candid_method(query)]
+#[query]
+fn get_candid_entities(collection: Key) -> Vec<Entity> {
+    get_candid_entities_store(&collection)
+}
+
 #[candid_method(update)]
 #[update]
 fn set_stable_entity(collection: Key, key: Key, controller: Entity) {
@@ -100,6 +107,12 @@ fn set_stable_entity(collection: Key, key: Key, controller: Entity) {
 #[query]
 fn get_stable_entity(collection: Key, key: Key) -> Option<Entity> {
     get_stable_entity_store(&collection, &key)
+}
+
+#[candid_method(query)]
+#[query]
+fn get_stable_entities(collection: Key) -> Vec<Entity> {
+    get_stable_entities_store(&collection)
 }
 
 ///

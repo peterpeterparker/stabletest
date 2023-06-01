@@ -32,11 +32,11 @@ const getStableControllers = async () => console.log(await stabletest_backend.ge
 // Entity
 
 const collection = "my_collection";
-const key = "my_key";
+const key = "my_key_2";
 
 const addCandidEntity = async () => {
   const entity = {
-    data: [2],
+    data: [5],
     created_at: 0n,
     updated_at: 0n,
   };
@@ -48,9 +48,11 @@ const addCandidEntity = async () => {
 
 const getCandidEntity = async () => console.log(await stabletest_backend.get_candid_entity(collection, key));
 
+const listCandidEntities = async () => console.log(await stabletest_backend.get_candid_entities(collection));
+
 const addStableEntity = async () => {
   const entity = {
-    data: [1],
+    data: [55],
     created_at: 0n,
     updated_at: 0n,
   };
@@ -62,6 +64,7 @@ const addStableEntity = async () => {
 
 const getStableEntity = async () => console.log(await stabletest_backend.get_stable_entity(collection, key));
 
+const listStableEntities = async () => console.log(await stabletest_backend.get_stable_entities(collection));
 
 // Init
 
@@ -71,8 +74,10 @@ const init = () => {
 
   document.querySelector("#add-candid-entity").addEventListener("click", addCandidEntity, {passive: true});
   document.querySelector("#get-candid-entity").addEventListener("click", getCandidEntity, {passive: true});
+  document.querySelector("#list-candid-entities").addEventListener("click", listCandidEntities, {passive: true});
   document.querySelector("#add-stable-entity").addEventListener("click", addStableEntity, {passive: true});
   document.querySelector("#get-stable-entity").addEventListener("click", getStableEntity, {passive: true});
+  document.querySelector("#list-stable-entities").addEventListener("click", listStableEntities, {passive: true});
 }
 
 document.addEventListener("DOMContentLoaded", init, {once: true});

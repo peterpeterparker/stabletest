@@ -14,11 +14,13 @@ export const idlFactory = ({ IDL }) => {
         [IDL.Vec(IDL.Tuple(IDL.Principal, Controller))],
         ['query'],
       ),
+    'get_candid_entities' : IDL.Func([IDL.Text], [IDL.Vec(Entity)], ['query']),
     'get_candid_entity' : IDL.Func(
         [IDL.Text, IDL.Text],
         [IDL.Opt(Entity)],
         ['query'],
       ),
+    'get_stable_entities' : IDL.Func([IDL.Text], [IDL.Vec(Entity)], ['query']),
     'get_stable_entity' : IDL.Func(
         [IDL.Text, IDL.Text],
         [IDL.Opt(Entity)],

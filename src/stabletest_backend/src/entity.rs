@@ -49,6 +49,21 @@ fn get_candid_entity_impl(collection: &Key, key: &Key, state: &DbData) -> Option
     }
 }
 
+pub fn get_candid_entities(collection: &Key) -> Vec<Entity> {
+    STATE.with(|state| get_candid_entities_impl(collection, &state.borrow_mut().stable.db))
+}
+
+fn get_candid_entities_impl(collection: &Key, state: &DbData) -> Vec<Entity> {
+    let col = state.db.get(collection);
+
+    match col {
+        None => Vec::new(),
+        Some(col) => col.into_iter().map(|(_, entity)| {
+            entity.clone()
+        }).collect()
+    }
+}
+
 /// Stable
 
 pub fn set_stable_entity(collection: &Key, key: &Key, controller: &Entity) {
@@ -77,4 +92,16 @@ fn get_stable_entity_impl(collection: &Key, key: &Key, new_db: &NewDb) -> Option
     };
 
     new_db.get(&stable_key)
+}
+
+pub fn get_stable_entities(collection: &Key) -> Vec<Entity> {
+    STATE.with(|state| get_stable_entities_impl(collection, &state.borrow_mut().new_db))
+}
+
+fn get_stable_entities_impl(collection: &Key, new_db: &NewDb) -> Vec<Entity> {
+    new_db.iter().filter(|(key, _)| {
+        key.collection_key == collection.clone()
+    }).map(|(_, entity)| {
+        entity
+    }).collect()
 }

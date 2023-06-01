@@ -9,7 +9,9 @@ export interface Entity {
 }
 export interface _SERVICE {
   'get_candid_controllers' : ActorMethod<[], Array<[Principal, Controller]>>,
+  'get_candid_entities' : ActorMethod<[string], Array<Entity>>,
   'get_candid_entity' : ActorMethod<[string, string], [] | [Entity]>,
+  'get_stable_entities' : ActorMethod<[string], Array<Entity>>,
   'get_stable_entity' : ActorMethod<[string, string], [] | [Entity]>,
   'set_candid_controllers' : ActorMethod<[Principal, Controller], undefined>,
   'set_candid_entity' : ActorMethod<[string, string, Entity], undefined>,
