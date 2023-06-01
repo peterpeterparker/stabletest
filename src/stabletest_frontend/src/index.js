@@ -32,7 +32,7 @@ const getStableControllers = async () => console.log(await stabletest_backend.ge
 // Entity
 
 const collection = "my_collection";
-const key = "my_key_2";
+const key = "my_key_3";
 
 const addCandidEntity = async () => {
   const entity = {
@@ -52,7 +52,7 @@ const listCandidEntities = async () => console.log(await stabletest_backend.get_
 
 const addStableEntity = async () => {
   const entity = {
-    data: [55],
+    data: [44],
     created_at: 0n,
     updated_at: 0n,
   };
