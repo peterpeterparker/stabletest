@@ -6,11 +6,11 @@ type Entity = record {
 };
 service : {
   get_candid_controllers : () -> (vec record { principal; Controller }) query;
+  get_candid_entities : (text) -> (vec Entity) query;
   get_candid_entity : (text, text) -> (opt Entity) query;
-  get_stable_controllers : () -> (vec record { principal; Controller }) query;
+  get_stable_entities : (text) -> (vec Entity) query;
   get_stable_entity : (text, text) -> (opt Entity) query;
   set_candid_controllers : (principal, Controller) -> ();
   set_candid_entity : (text, text, Entity) -> ();
-  set_stable_controllers : (principal, Controller) -> ();
   set_stable_entity : (text, text, Entity) -> ();
 }

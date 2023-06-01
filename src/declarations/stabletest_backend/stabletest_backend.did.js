@@ -14,16 +14,13 @@ export const idlFactory = ({ IDL }) => {
         [IDL.Vec(IDL.Tuple(IDL.Principal, Controller))],
         ['query'],
       ),
+    'get_candid_entities' : IDL.Func([IDL.Text], [IDL.Vec(Entity)], ['query']),
     'get_candid_entity' : IDL.Func(
         [IDL.Text, IDL.Text],
         [IDL.Opt(Entity)],
         ['query'],
       ),
-    'get_stable_controllers' : IDL.Func(
-        [],
-        [IDL.Vec(IDL.Tuple(IDL.Principal, Controller))],
-        ['query'],
-      ),
+    'get_stable_entities' : IDL.Func([IDL.Text], [IDL.Vec(Entity)], ['query']),
     'get_stable_entity' : IDL.Func(
         [IDL.Text, IDL.Text],
         [IDL.Opt(Entity)],
@@ -31,7 +28,6 @@ export const idlFactory = ({ IDL }) => {
       ),
     'set_candid_controllers' : IDL.Func([IDL.Principal, Controller], [], []),
     'set_candid_entity' : IDL.Func([IDL.Text, IDL.Text, Entity], [], []),
-    'set_stable_controllers' : IDL.Func([IDL.Principal, Controller], [], []),
     'set_stable_entity' : IDL.Func([IDL.Text, IDL.Text, Entity], [], []),
   });
 };
