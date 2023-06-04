@@ -12,6 +12,7 @@ use crate::controllers::{
 use crate::entity::{
     get_candid_entity as get_candid_entity_store, get_stable_entity as get_stable_entity_store,
     set_candid_entity as set_candid_entity_store, set_stable_entity as set_stable_entity_store,
+    del_stable_entity as del_stable_entity_store,
 };
 use crate::types::candid::{
     Controller, ControllerId, Controllers, Entity, Key, StableState, State,
@@ -140,6 +141,12 @@ fn set_stable_entity(collection: Key, key: Key, controller: Entity) {
 #[query]
 fn get_stable_entity(collection: Key, key: Key) -> Option<Entity> {
     get_stable_entity_store(&collection, &key)
+}
+
+#[candid_method(update)]
+#[update]
+fn del_stable_entity(collection: Key, key: Key) {
+    del_stable_entity_store(&collection, &key);
 }
 
 ///

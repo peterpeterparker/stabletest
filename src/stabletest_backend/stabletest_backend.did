@@ -5,6 +5,7 @@ type Entity = record {
   created_at : nat64;
 };
 service : {
+  del_stable_entity : (text, text) -> ();
   get_candid_controllers : () -> (vec record { principal; Controller }) query;
   get_candid_entity : (text, text) -> (opt Entity) query;
   get_stable_controllers : () -> (vec record { principal; Controller }) query;

@@ -9,6 +9,7 @@ export const idlFactory = ({ IDL }) => {
     'created_at' : IDL.Nat64,
   });
   return IDL.Service({
+    'del_stable_entity' : IDL.Func([IDL.Text, IDL.Text], [], []),
     'get_candid_controllers' : IDL.Func(
         [],
         [IDL.Vec(IDL.Tuple(IDL.Principal, Controller))],

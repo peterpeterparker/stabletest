@@ -8,6 +8,7 @@ export interface Entity {
   'created_at' : bigint,
 }
 export interface _SERVICE {
+  'del_stable_entity' : ActorMethod<[string, string], undefined>,
   'get_candid_controllers' : ActorMethod<[], Array<[Principal, Controller]>>,
   'get_candid_entity' : ActorMethod<[string, string], [] | [Entity]>,
   'get_stable_controllers' : ActorMethod<[], Array<[Principal, Controller]>>,

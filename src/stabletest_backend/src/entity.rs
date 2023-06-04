@@ -69,3 +69,12 @@ pub fn get_stable_entity(collection: &Key, key: &Key) -> Option<Entity> {
 
     DB_STATE.with(|p| p.borrow().get(&stable_key))
 }
+
+pub fn del_stable_entity(collection: &Key, key: &Key) {
+    let stable_key = StableKey {
+        collection_key: collection.clone(),
+        entity_key: key.clone(),
+    };
+
+    DB_STATE.with(|p| p.borrow_mut().remove(&stable_key));
+}

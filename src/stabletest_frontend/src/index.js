@@ -62,6 +62,11 @@ const addStableEntity = async () => {
 
 const getStableEntity = async () => console.log(await stabletest_backend.get_stable_entity(collection, key));
 
+const delStableEntity = async () => {
+  await stabletest_backend.del_stable_entity(collection, key);
+
+  await getStableEntity();
+}
 
 // Init
 
@@ -75,6 +80,7 @@ const init = () => {
   document.querySelector("#get-candid-entity").addEventListener("click", getCandidEntity, {passive: true});
   document.querySelector("#add-stable-entity").addEventListener("click", addStableEntity, {passive: true});
   document.querySelector("#get-stable-entity").addEventListener("click", getStableEntity, {passive: true});
+  document.querySelector("#del-stable-entity").addEventListener("click", delStableEntity, {passive: true});
 }
 
 document.addEventListener("DOMContentLoaded", init, {once: true});
